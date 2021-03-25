@@ -1,0 +1,6 @@
+# Basic .gitignore, nothing much
+.DS_Store
+.o
+a.out
+
+build/
