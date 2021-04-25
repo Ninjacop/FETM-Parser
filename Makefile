@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -Wall
+CXXFLAGS = -g -Wall -std=c++17
 SRCS = $(wildcard *.cpp src/*.cpp)
 BUILD = build
 OUT = fetmworks
@@ -11,7 +11,7 @@ all:
 
 compile: 
 	mkdir -p $(BUILD)
-	$(CXX) $(SRCS) -o $(BUILD)/$(OUT)
+	$(CXX) $(CXXFLAGS) $(SRCS) -o $(BUILD)/$(OUT)
 
 run:
 	./$(BUILD)/$(OUT) $(TESTS)

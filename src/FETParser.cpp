@@ -1,6 +1,6 @@
 // FETParser.cpp
 // Created 24 March 2021
-#include "FETParser.hpp"
+#include "FETParser.h"
 #define FET_DESC_LENGTH 2
 #define BUFFER_LEN 100
 
@@ -23,32 +23,47 @@ FETHeader FETParser::parseHeader(std::string filename) {
   if (fetfile.read(buffer, BUFFER_LEN)) {
     for (int i = 0; i < BUFFER_LEN; i++) {
       switch (buffer[i]) {
-        case UnsignedChar:
-          feth.filetype = getUnsignedChar(buffer, i);
+        case Types::UnsignedChar:
+          feth.setFiletype((char)getUnsignedChar(std::string(buffer), i));
           break;
-        case String:
-          feth.metadata = getString(buffer, i);
+        case Types::String:
+          feth.setMetadata(getString(std::string(buffer), i));
           return feth;
         default:
           break;
         }
     }
   }
-
+                               
   return feth;
 }
 
-// FETParser::getUnsignedChar(char *str, int pos)
+Node FETParser::getNextToken(std::string str, int pos) {
+  switch (str[pos]) {
+    case Char:
+    case UnsignedChar: 
+      break;
+  default:
+    break;
+  }
+
+  Node node;
+  node.setType(Char);
+
+  return node;
+}
+
+// FETParser::getUnsignedChar(std::string str, int pos)
 // Get the next byte in a given string, marked in 
 // FETParser::parseHeader()
-unsigned char FETParser::getUnsignedChar(char *str, int pos) {
+unsigned char FETParser::getUnsignedChar(std::string str, int pos) {
   return (unsigned char)str[pos+1];
 }
 
-// FETParser::getString(char *str, int pos)
+// FETParser::getString(std::string str, int pos)
 // Continuously feed bytes from a given C string into a 
 // str::string, starting at a specific position. 
-std::string FETParser::getString(char *str, int pos) {
+std::string FETParser::getString(std::string str, int pos) {
   std::string returnString;
 
   while (str[pos] != '\0') {

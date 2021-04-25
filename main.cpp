@@ -1,8 +1,8 @@
 // main.cpp
 // Created 24 March 2021
 
-#include "lib/libs.hpp"
-#include "src/FETParser.hpp"
+#include "lib/libs.h"
+#include "src/FETParser.h"
 
 
 // Enters the FETM file parser program
@@ -18,8 +18,8 @@ int main(int argc, char* argv[]) {
 
   feth = fetp.parseHeader(std::string(argv[1]));
   std::cout << "Is .FETM file? (has 0x7C): " <<
-    (feth.filetype == (unsigned char)0x7C ? "Yes" : "No") << std::endl;
-  std::cout << "Metadata: " << feth.metadata << std::endl;
+    (feth.getFiletype() == (char)0x7C ? "Yes" : "No") << std::endl;
+  std::cout << "Metadata: " << feth.getMetadata() << std::endl;
 
   return 0;
 }
