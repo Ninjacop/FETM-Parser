@@ -1,12 +1,11 @@
-#ifndef LIB_LIBS
-#define LIB_LIBS
+#ifndef LIB_H
+#define LIB_H
 
-#include <iostream>
+#include <cassert>
 #include <fstream>
+#include <iostream>
+#include <stdlib.h>
 #include <string>
 #include <vector>
-#include <variant>
-#include <cassert>
-#include <stdlib.h>
 
 #endif
